@@ -4,9 +4,9 @@
     "height": 250,
     "title": "Formula 1 Driver Race Starts vs. Number of Grand Prix Podiums Since 1950",
     "data": {
-      "url": "https://raw.githubusercontent.com/ankitaagosavi/3179week10/main/Week%2010%20Homework/data/BubbleChartData.csv"
+        "url": "https://raw.githubusercontent.com/ankitaagosavi/3179random/main/BubbleChartData.csv"
     },
-    "params": [ {
+    "params": [{
         "name": "Continent_selection",
         "bind": {
             "input": "select",
@@ -19,7 +19,7 @@
                 "Asia",
                 "Oceania"
             ],
-            "labels":[
+            "labels": [
                 "Show All",
                 "North America",
                 "South America",
@@ -30,16 +30,15 @@
             ],
             "name": "Continent Selection: "
         }
-    } ],
+    }],
     "transform": [
         {"filter": "Continent_selection == null || datum.Continent == Continent_selection"}
     ],
-    "layer": [
-        {
+    "layer": [{
             "mark": "circle",
             "encoding": {
-                "x": {"field": "Race Starts", "type": "quantitative"}, 
-                "y": {"field": "Podiums", "type": "quantitative"},       
+                "x": {"field": "Race Starts", "type": "quantitative"},
+                "y": {"field": "Podiums", "type": "quantitative"},
                 "color": {
                     "field": "Continent",
                     "type": "nominal",
@@ -63,17 +62,31 @@
         {
             "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 8},
             "encoding": {
-                "x": {"value": 260},  
-                "y": {"value": 15},   
-                "text": {"value": "Lewis Hamilton"}
+                "x": {"value": 260},
+                "y": {"value": 15},
+                "text": {
+                    "condition": {
+                        "test": "datum.Driver !== 'Lewis Hamilton'",
+                        "value": ""
+                    },
+                    "field": "Driver",
+                    "type": "nominal"
+                }
             }
         },
         {
             "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 8},
             "encoding": {
-                "x": {"value": 220},  
-                "y": {"value": 55},   
-                "text": {"value": "Michael Schumacher"}   
+                "x": {"value": 220},
+                "y": {"value": 55},
+                "text": {
+                    "condition": {
+                        "test": "datum.Driver !== 'Michael Schumacher'",
+                        "value": ""
+                    },
+                    "field": "Driver",
+                    "type": "nominal"
+                }
             }
         }
     ]
