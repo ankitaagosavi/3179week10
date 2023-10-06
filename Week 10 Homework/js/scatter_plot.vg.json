@@ -1,0 +1,80 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 450,
+    "height": 250,
+    "title": "Formula 1 Driver Race Starts vs. Number of Grand Prix Podiums Since 1950",
+    "data": {
+      "url": "https://raw.githubusercontent.com/ankitaagosavi/3179random/main/BubbleChartData.csv"
+    },
+    "params": [ {
+        "name": "Continent_selection",
+        "bind": {
+            "input": "select",
+            "options": [
+                null,
+                "North America",
+                "South America",
+                "Europe",
+                "Africa",
+                "Asia",
+                "Oceania"
+            ],
+            "labels":[
+                "Show All",
+                "North America",
+                "South America",
+                "Europe",
+                "Africa",
+                "Asia",
+                "Oceania"
+            ],
+            "name": "Continent Selection: "
+        }
+    } ],
+    "transform": [
+        {"filter": "Continent_selection == null || datum.Continent == Continent_selection"}
+    ],
+    "layer": [
+        {
+            "mark": "circle",
+            "encoding": {
+                "x": {"field": "Race Starts", "type": "quantitative"}, 
+                "y": {"field": "Podiums", "type": "quantitative"},       
+                "color": {
+                    "field": "Continent",
+                    "type": "nominal",
+                    "legend": null,
+                    "scale": {
+                        "domain": ["North America", "South America", "Europe", "Africa", "Asia", "Oceania"],
+                        "range": ["#26b551", "#984ea3", "#ff7f00", "#ed4ed5", "#377eb8", "#a65628"]
+                    }
+                },
+                "opacity": {"value": 0.6},
+                "tooltip": [
+                    {"field": "Driver", "type": "nominal"},
+                    {"field": "Nationality", "type": "nominal"},
+                    {"field": "Race Starts", "type": "nominal"},
+                    {"field": "Pole Positions", "type": "quantitative", "format": ","},
+                    {"field": "Podiums", "type": "quantitative", "format": ","},
+                    {"field": "Race Wins", "type": "quantitative", "format": ","}
+                ]
+            }
+        },
+        {
+            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 8},
+            "encoding": {
+                "x": {"value": 260},  
+                "y": {"value": 15},   
+                "text": {"value": "Lewis Hamilton"}
+            }
+        },
+        {
+            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 8},
+            "encoding": {
+                "x": {"value": 220},  
+                "y": {"value": 55},   
+                "text": {"value": "Michael Schumacher"}   
+            }
+        }
+    ]
+}
